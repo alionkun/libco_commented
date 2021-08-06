@@ -232,6 +232,7 @@ int main(int argc,char *argv[])
 		{
 			break;
 		}
+        // 每个进程创建cnt个协程
 		for(int i=0;i<cnt;i++)
 		{
 			task_t * task = (task_t*)calloc( 1,sizeof(task_t) );

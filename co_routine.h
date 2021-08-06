@@ -28,7 +28,7 @@
 struct stCoRoutine_t;
 struct stShareStack_t;
 
-struct stCoRoutineAttr_t
+struct stCoRoutineAttr_t //协程配置，例如栈的大小
 {
 	int stack_size;
 	stShareStack_t*  share_stack;

@@ -469,19 +469,20 @@ struct stCoRoutine_t *co_create_env( stCoRoutineEnv_t * env, const stCoRoutineAt
 	}
 	if( at.stack_size <= 0 )
 	{
-		at.stack_size = 128 * 1024;
+		at.stack_size = 128 * 1024; // 协程栈最小128kb，最大8mb
 	}
 	else if( at.stack_size > 1024 * 1024 * 8 )
 	{
 		at.stack_size = 1024 * 1024 * 8;
 	}
 
-	if( at.stack_size & 0xFFF ) 
+	if( at.stack_size & 0xFFF ) // why
 	{
 		at.stack_size &= ~0xFFF;
 		at.stack_size += 0x1000;
 	}
 
+    // 在哪里释放
 	stCoRoutine_t *lp = (stCoRoutine_t*)malloc( sizeof(stCoRoutine_t) );
 	
 	memset( lp,0,(long)(sizeof(stCoRoutine_t))); 
@@ -491,6 +492,7 @@ struct stCoRoutine_t *co_create_env( stCoRoutineEnv_t * env, const stCoRoutineAt
 	lp->pfn = pfn;
 	lp->arg = arg;
 
+    // 分配运行时栈
 	stStackMem_t* stack_mem = NULL;
 	if( at.share_stack )
 	{
@@ -518,9 +520,10 @@ struct stCoRoutine_t *co_create_env( stCoRoutineEnv_t * env, const stCoRoutineAt
 	return lp;
 }
 
+// 创建一个协程
 int co_create( stCoRoutine_t **ppco,const stCoRoutineAttr_t *attr,pfn_co_routine_t pfn,void *arg )
 {
-	if( !co_get_curr_thread_env() ) 
+	if( !co_get_curr_thread_env() ) // 获取本线程的协程管理器
 	{
 		co_init_curr_thread_env();
 	}
@@ -922,7 +925,7 @@ int co_poll_inner( stCoEpoll_t *ctx,struct pollfd fds[], nfds_t nfds, int timeou
 	}
 	if (timeout < 0)
 	{
-		timeout = INT_MAX;
+		timeout = INT_MAX; // 永久
 	}
 	int epfd = ctx->iEpollFd;
 	stCoRoutine_t* self = co_self();

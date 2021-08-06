@@ -577,7 +577,7 @@ ssize_t recv( int socket, void *buffer, size_t length, int flags )
 
 extern int co_poll_inner( stCoEpoll_t *ctx,struct pollfd fds[], nfds_t nfds, int timeout, poll_pfn_t pollfunc);
 
-int poll(struct pollfd fds[], nfds_t nfds, int timeout)
+int poll(struct pollfd fds[], nfds_t nfds, int timeout) // 监控fd
 {
 	HOOK_SYS_FUNC( poll );
 
