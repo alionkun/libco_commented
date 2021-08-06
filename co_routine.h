@@ -29,14 +29,14 @@ available.
 struct stCoRoutine_t;
 struct stShareStack_t;
 
-struct stCoRoutineAttr_t //协程配置，例如栈的大小
+struct stCoRoutineAttr_t  //协程配置，例如栈的大小
 {
-  int stack_size;
-  stShareStack_t *share_stack;
-  stCoRoutineAttr_t() {
-    stack_size = 128 * 1024;
-    share_stack = NULL;
-  }
+    int stack_size;
+    stShareStack_t *share_stack;
+    stCoRoutineAttr_t() {
+        stack_size  = 128 * 1024;
+        share_stack = NULL;
+    }
 } __attribute__((packed));
 
 struct stCoEpoll_t;
@@ -49,7 +49,7 @@ int co_create(stCoRoutine_t **co, const stCoRoutineAttr_t *attr,
               void *(*routine)(void *), void *arg);
 void co_resume(stCoRoutine_t *co);
 void co_yield(stCoRoutine_t *co);
-void co_yield_ct(); // ct = current thread
+void co_yield_ct();  // ct = current thread
 void co_release(stCoRoutine_t *co);
 void co_reset(stCoRoutine_t *co);
 
@@ -65,7 +65,7 @@ void *co_getspecific(pthread_key_t key);
 
 // 4.event
 
-stCoEpoll_t *co_get_epoll_ct(); // ct = current thread
+stCoEpoll_t *co_get_epoll_ct();  // ct = current thread
 
 // 5.hook syscall ( poll/read/write/recv/send/recvfrom/sendto )
 

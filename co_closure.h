@@ -20,9 +20,9 @@ available.
 #ifndef __CO_CLOSURE_H__
 #define __CO_CLOSURE_H__
 struct stCoClosure_t {
-public:
-  virtual void exec() = 0;
-  virtual ~stCoClosure_t() {}
+   public:
+    virtual void exec() = 0;
+    virtual ~stCoClosure_t() {}
 };
 
 // 1.base
@@ -60,31 +60,31 @@ public:
 
 // 2.1 reference
 
-#define co_ref(name, ...)                                                      \
-  repeat(comac_argc(__VA_ARGS__), decl_typeof,                                 \
-         __VA_ARGS__) class type_##name {                                      \
-  public:                                                                      \
-    repeat(comac_argc(__VA_ARGS__), impl_typeof, __VA_ARGS__) int _member_cnt; \
-    type_##name(repeat(comac_argc(__VA_ARGS__), con_param_typeof,              \
-                       __VA_ARGS__)...)                                        \
-        : repeat(comac_argc(__VA_ARGS__), param_init_typeof, __VA_ARGS__)      \
-              _member_cnt(comac_argc(__VA_ARGS__)) {}                          \
-  } name(__VA_ARGS__);
+#define co_ref(name, ...)                                                          \
+    repeat(comac_argc(__VA_ARGS__), decl_typeof,                                   \
+           __VA_ARGS__) class type_##name {                                        \
+       public:                                                                     \
+        repeat(comac_argc(__VA_ARGS__), impl_typeof, __VA_ARGS__) int _member_cnt; \
+        type_##name(repeat(comac_argc(__VA_ARGS__), con_param_typeof,              \
+                           __VA_ARGS__)...)                                        \
+            : repeat(comac_argc(__VA_ARGS__), param_init_typeof, __VA_ARGS__)      \
+                  _member_cnt(comac_argc(__VA_ARGS__)) {}                          \
+    } name(__VA_ARGS__);
 
 // 2.2 function
 
-#define co_func(name, ...)                                                     \
-  repeat(comac_argc(__VA_ARGS__), decl_typeof, __VA_ARGS__) class name         \
-      : public stCoClosure_t {                                                 \
-  public:                                                                      \
-    repeat(comac_argc(__VA_ARGS__), impl_typeof_cpy,                           \
-           __VA_ARGS__) int _member_cnt;                                       \
-                                                                               \
-  public:                                                                      \
-    name(repeat(comac_argc(__VA_ARGS__), con_param_typeof, __VA_ARGS__)...)    \
-        : repeat(comac_argc(__VA_ARGS__), param_init_typeof, __VA_ARGS__)      \
-              _member_cnt(comac_argc(__VA_ARGS__)) {}                          \
-    void exec()
+#define co_func(name, ...)                                                      \
+    repeat(comac_argc(__VA_ARGS__), decl_typeof, __VA_ARGS__) class name        \
+        : public stCoClosure_t {                                                \
+       public:                                                                  \
+        repeat(comac_argc(__VA_ARGS__), impl_typeof_cpy,                        \
+               __VA_ARGS__) int _member_cnt;                                    \
+                                                                                \
+       public:                                                                  \
+        name(repeat(comac_argc(__VA_ARGS__), con_param_typeof, __VA_ARGS__)...) \
+            : repeat(comac_argc(__VA_ARGS__), param_init_typeof, __VA_ARGS__)   \
+                  _member_cnt(comac_argc(__VA_ARGS__)) {}                       \
+        void exec()
 
 #define co_func_end }
 
