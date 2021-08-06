@@ -20,4 +20,3 @@ void clsCoMutex::CoUnLock() {
   m_iWaitItemCnt--;
   co_cond_signal(m_ptCondSignal);
 }
-

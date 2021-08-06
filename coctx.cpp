@@ -83,48 +83,48 @@ enum {
 
 // 64 bit
 extern "C" {
-extern void coctx_swap(coctx_t*, coctx_t*) asm("coctx_swap");
+extern void coctx_swap(coctx_t *, coctx_t *) asm("coctx_swap");
 };
 #if defined(__i386__)
-int coctx_init(coctx_t* ctx) {
+int coctx_init(coctx_t *ctx) {
   memset(ctx, 0, sizeof(*ctx));
   return 0;
 }
-int coctx_make(coctx_t* ctx, coctx_pfn_t pfn, const void* s, const void* s1) {
+int coctx_make(coctx_t *ctx, coctx_pfn_t pfn, const void *s, const void *s1) {
   // make room for coctx_param
-  char* sp = ctx->ss_sp + ctx->ss_size - sizeof(coctx_param_t);
-  sp = (char*)((unsigned long)sp & -16L);
+  char *sp = ctx->ss_sp + ctx->ss_size - sizeof(coctx_param_t);
+  sp = (char *)((unsigned long)sp & -16L);
 
-  coctx_param_t* param = (coctx_param_t*)sp;
-  void** ret_addr = (void**)(sp - sizeof(void*) * 2);
-  *ret_addr = (void*)pfn;
+  coctx_param_t *param = (coctx_param_t *)sp;
+  void **ret_addr = (void **)(sp - sizeof(void *) * 2);
+  *ret_addr = (void *)pfn;
   param->s1 = s;
   param->s2 = s1;
 
   memset(ctx->regs, 0, sizeof(ctx->regs));
 
-  ctx->regs[kESP] = (char*)(sp) - sizeof(void*) * 2;
+  ctx->regs[kESP] = (char *)(sp) - sizeof(void *) * 2;
   return 0;
 }
 #elif defined(__x86_64__)
-int coctx_make(coctx_t* ctx, coctx_pfn_t pfn, const void* s, const void* s1) {
-  char* sp = ctx->ss_sp + ctx->ss_size - sizeof(void*);
-  sp = (char*)((unsigned long)sp & -16LL);
+int coctx_make(coctx_t *ctx, coctx_pfn_t pfn, const void *s, const void *s1) {
+  char *sp = ctx->ss_sp + ctx->ss_size - sizeof(void *);
+  sp = (char *)((unsigned long)sp & -16LL);
 
   memset(ctx->regs, 0, sizeof(ctx->regs));
-  void** ret_addr = (void**)(sp);
-  *ret_addr = (void*)pfn;
+  void **ret_addr = (void **)(sp);
+  *ret_addr = (void *)pfn;
 
   ctx->regs[kRSP] = sp;
 
-  ctx->regs[kRETAddr] = (char*)pfn;
+  ctx->regs[kRETAddr] = (char *)pfn;
 
-  ctx->regs[kRDI] = (char*)s;
-  ctx->regs[kRSI] = (char*)s1;
+  ctx->regs[kRDI] = (char *)s;
+  ctx->regs[kRSI] = (char *)s1;
   return 0;
 }
 
-int coctx_init(coctx_t* ctx) {
+int coctx_init(coctx_t *ctx) {
   memset(ctx, 0, sizeof(*ctx));
   return 0;
 }
