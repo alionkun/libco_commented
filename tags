@@ -44,13 +44,13 @@ DYNAMICLIBPATH	co.mk	/^DYNAMICLIBPATH=$(SRCROOT)\/solib$/;"	m
 EAX	coctx.cpp	/^#define EAX /;"	d	file:
 ECX	coctx.cpp	/^#define ECX /;"	d	file:
 EIP	coctx.cpp	/^#define EIP /;"	d	file:
-EPOLLERR	co_epoll.h	/^  EPOLLERR = 0X008,$/;"	e	enum:EPOLL_EVENTS
-EPOLLHUP	co_epoll.h	/^  EPOLLHUP = 0X010,$/;"	e	enum:EPOLL_EVENTS
-EPOLLIN	co_epoll.h	/^  EPOLLIN = 0X001,$/;"	e	enum:EPOLL_EVENTS
-EPOLLOUT	co_epoll.h	/^  EPOLLOUT = 0X004,$/;"	e	enum:EPOLL_EVENTS
-EPOLLPRI	co_epoll.h	/^  EPOLLPRI = 0X002,$/;"	e	enum:EPOLL_EVENTS
-EPOLLRDNORM	co_epoll.h	/^  EPOLLRDNORM = 0x40,$/;"	e	enum:EPOLL_EVENTS
-EPOLLWRNORM	co_epoll.h	/^  EPOLLWRNORM = 0x004,$/;"	e	enum:EPOLL_EVENTS
+EPOLLERR	co_epoll.h	/^    EPOLLERR = 0X008,$/;"	e	enum:EPOLL_EVENTS
+EPOLLHUP	co_epoll.h	/^    EPOLLHUP = 0X010,$/;"	e	enum:EPOLL_EVENTS
+EPOLLIN	co_epoll.h	/^    EPOLLIN  = 0X001,$/;"	e	enum:EPOLL_EVENTS
+EPOLLOUT	co_epoll.h	/^    EPOLLOUT = 0X004,$/;"	e	enum:EPOLL_EVENTS
+EPOLLPRI	co_epoll.h	/^    EPOLLPRI = 0X002,$/;"	e	enum:EPOLL_EVENTS
+EPOLLRDNORM	co_epoll.h	/^    EPOLLRDNORM = 0x40,$/;"	e	enum:EPOLL_EVENTS
+EPOLLWRNORM	co_epoll.h	/^    EPOLLWRNORM = 0x004,$/;"	e	enum:EPOLL_EVENTS
 EPOLL_CTL_ADD	co_epoll.h	/^#define EPOLL_CTL_ADD /;"	d
 EPOLL_CTL_DEL	co_epoll.h	/^#define EPOLL_CTL_DEL /;"	d
 EPOLL_CTL_MOD	co_epoll.h	/^#define EPOLL_CTL_MOD /;"	d
@@ -75,7 +75,7 @@ OnProcessPfn_t	co_routine.cpp	/^typedef void (*OnProcessPfn_t)(stTimeoutItem_t *
 OnSignalProcessEvent	co_routine.cpp	/^static void OnSignalProcessEvent(stTimeoutItem_t *ap) {$/;"	f	file:
 PROGS	Makefile	/^PROGS = colib example_poll example_echosvr example_echocli example_thread  example_cond example_specific example_copystack example_closure example_setenv$/;"	m
 PollEvent2Epoll	co_routine.cpp	/^static uint32_t PollEvent2Epoll(short events) {$/;"	f	file:
-PopHead	co_routine.cpp	/^template <class TNode, class TLink> void inline PopHead(TLink *apLink) {$/;"	f
+PopHead	co_routine.cpp	/^void inline PopHead(TLink *apLink) {$/;"	f
 Producer	example_cond.cpp	/^void *Producer(void *args) {$/;"	f
 R12	coctx.cpp	/^#define R12 /;"	d	file:
 R13	coctx.cpp	/^#define R13 /;"	d	file:
@@ -92,7 +92,7 @@ RDX	coctx.cpp	/^#define RDX /;"	d	file:
 RIP	coctx.cpp	/^#define RIP /;"	d	file:
 RSI	coctx.cpp	/^#define RSI /;"	d	file:
 RSP	coctx.cpp	/^#define RSP /;"	d	file:
-RemoveFromLink	co_routine.cpp	/^template <class T, class TLink> void RemoveFromLink(T *ap) {$/;"	f
+RemoveFromLink	co_routine.cpp	/^void RemoveFromLink(T *ap) {$/;"	f
 RoutineFunc	example_copystack.cpp	/^void *RoutineFunc(void *args) {$/;"	f
 RoutineFunc	example_setenv.cpp	/^void *RoutineFunc(void *args) {$/;"	f
 RoutineFunc	example_specific.cpp	/^void *RoutineFunc(void *args) {$/;"	f
@@ -108,7 +108,7 @@ SetNonBlock	example_echosvr.cpp	/^static int SetNonBlock(int iSock) {$/;"	f	file
 SetNonBlock	example_poll.cpp	/^static int SetNonBlock(int iSock) {$/;"	f	file:
 TakeAllTimeout	co_routine.cpp	/^inline void TakeAllTimeout(stTimeout_t *apTimeout, unsigned long long allNow,$/;"	f
 UNAME	Makefile	/^UNAME := $(shell uname -s)$/;"	m
-_EPOLL_SIZE	co_routine.cpp	/^  static const int _EPOLL_SIZE = 1024 * 10;$/;"	m	struct:stCoEpoll_t	file:
+_EPOLL_SIZE	co_routine.cpp	/^    static const int _EPOLL_SIZE = 1024 * 10;$/;"	m	struct:stCoEpoll_t	file:
 __CO_CLOSURE_H__	co_closure.h	/^#define __CO_CLOSURE_H__$/;"	d
 __CO_CTX_H__	coctx.h	/^#define __CO_CTX_H__$/;"	d
 __CO_EPOLL_H__	co_epoll.h	/^#define __CO_EPOLL_H__$/;"	d
@@ -118,36 +118,36 @@ __poll	co_hook_sys_call.cpp	/^int __poll(struct pollfd fds[], nfds_t nfds, int t
 __poll_pfn_t	co_hook_sys_call.cpp	/^typedef int (*__poll_pfn_t)(struct pollfd fds[], nfds_t nfds, int timeout);$/;"	t	file:
 __res_state	co_hook_sys_call.cpp	/^res_state __res_state() {$/;"	f
 __res_state_pfn_t	co_hook_sys_call.cpp	/^typedef res_state (*__res_state_pfn_t)();$/;"	t	file:
-aSpec	co_routine_inner.h	/^  stCoSpec_t aSpec[1024];$/;"	m	struct:stCoRoutine_t
+aSpec	co_routine_inner.h	/^    stCoSpec_t aSpec[1024];$/;"	m	struct:stCoRoutine_t
 accept_routine	example_echosvr.cpp	/^static void *accept_routine(void *) {$/;"	f	file:
-addr	example_poll.cpp	/^  struct sockaddr_in addr;$/;"	m	struct:task_t	typeref:struct:task_t::sockaddr_in	file:
+addr	example_poll.cpp	/^    struct sockaddr_in addr;$/;"	m	struct:task_t	typeref:struct:task_t::sockaddr_in	file:
 alloc_by_fd	co_hook_sys_call.cpp	/^static inline rpchook_t *alloc_by_fd(int fd) {$/;"	f	file:
-alloc_idx	co_routine_inner.h	/^  unsigned int alloc_idx;$/;"	m	struct:stShareStack_t
-arg	co_routine_inner.h	/^  void *arg;$/;"	m	struct:stCoRoutine_t
-bIsRespNotExist	co_hook_sys_call.cpp	/^  unsigned char bIsRespNotExist;$/;"	m	struct:rpchook_connagent_head_t	file:
-bTimeout	co_routine.cpp	/^  bool bTimeout;$/;"	m	struct:stTimeoutItem_t	file:
-bVersion	co_hook_sys_call.cpp	/^  unsigned char bVersion;$/;"	m	struct:rpchook_connagent_head_t	file:
+alloc_idx	co_routine_inner.h	/^    unsigned int alloc_idx;$/;"	m	struct:stShareStack_t
+arg	co_routine_inner.h	/^    void *arg;$/;"	m	struct:stCoRoutine_t
+bIsRespNotExist	co_hook_sys_call.cpp	/^    unsigned char bIsRespNotExist;$/;"	m	struct:rpchook_connagent_head_t	file:
+bTimeout	co_routine.cpp	/^    bool bTimeout;$/;"	m	struct:stTimeoutItem_t	file:
+bVersion	co_hook_sys_call.cpp	/^    unsigned char bVersion;$/;"	m	struct:rpchook_connagent_head_t	file:
 batch_exec	example_closure.cpp	/^static void batch_exec(vector<stCoClosure_t *> &v) {$/;"	f	file:
-buffer	co_hook_sys_call.cpp	/^  char *buffer;$/;"	m	struct:hostbuf_wrap	file:
-cEnableSysHook	co_routine_inner.h	/^  char cEnableSysHook;$/;"	m	struct:stCoRoutine_t
-cEnd	co_routine_inner.h	/^  char cEnd;$/;"	m	struct:stCoRoutine_t
-cIsMain	co_routine_inner.h	/^  char cIsMain;$/;"	m	struct:stCoRoutine_t
-cIsShareStack	co_routine_inner.h	/^  char cIsShareStack;$/;"	m	struct:stCoRoutine_t
-cStart	co_routine_inner.h	/^  char cStart;$/;"	m	struct:stCoRoutine_t
-clear	co_epoll.cpp	/^  inline int clear(int fd) {$/;"	f	class:clsFdMap
+buffer	co_hook_sys_call.cpp	/^    char *buffer;$/;"	m	struct:hostbuf_wrap	file:
+cEnableSysHook	co_routine_inner.h	/^    char cEnableSysHook;$/;"	m	struct:stCoRoutine_t
+cEnd	co_routine_inner.h	/^    char cEnd;$/;"	m	struct:stCoRoutine_t
+cIsMain	co_routine_inner.h	/^    char cIsMain; \/\/ 是否为主协程，主协程在系统的栈上，其他协程在堆上$/;"	m	struct:stCoRoutine_t
+cIsShareStack	co_routine_inner.h	/^    char cIsShareStack;$/;"	m	struct:stCoRoutine_t
+cStart	co_routine_inner.h	/^    char cStart;$/;"	m	struct:stCoRoutine_t
+clear	co_epoll.cpp	/^    inline int clear(int fd) {$/;"	f	class:clsFdMap
 close	co_hook_sys_call.cpp	/^int close(int fd) {$/;"	f
 close_pfn_t	co_hook_sys_call.cpp	/^typedef int (*close_pfn_t)(int fd);$/;"	t	file:
 clsCoMutex	co_comm.cpp	/^clsCoMutex::clsCoMutex() {$/;"	f	class:clsCoMutex
 clsCoMutex	co_comm.h	/^class clsCoMutex {$/;"	c
-clsFdMap	co_epoll.cpp	/^  clsFdMap() { memset(m_pp, 0, sizeof(m_pp)); }$/;"	f	class:clsFdMap
-clsFdMap	co_epoll.cpp	/^class clsFdMap \/\/ million of fd , 1024 * 1024$/;"	c	file:
-clsSmartLock	co_comm.h	/^  clsSmartLock(clsCoMutex *m) {$/;"	f	class:clsSmartLock
+clsFdMap	co_epoll.cpp	/^    clsFdMap() { memset(m_pp, 0, sizeof(m_pp)); }$/;"	f	class:clsFdMap
+clsFdMap	co_epoll.cpp	/^class clsFdMap  \/\/ million of fd , 1024 * 1024$/;"	c	file:
+clsSmartLock	co_comm.h	/^    clsSmartLock(clsCoMutex *m) {$/;"	f	class:clsSmartLock
 clsSmartLock	co_comm.h	/^class clsSmartLock {$/;"	c
-cnt	co_hook_sys_call.cpp	/^  size_t cnt;$/;"	m	struct:stCoSysEnvArr_t	file:
-co	co_routine.cpp	/^  stCoRoutine_t *co;$/;"	m	struct:stHookPThreadSpec_t	file:
-co	example_echosvr.cpp	/^  stCoRoutine_t *co;$/;"	m	struct:task_t	file:
-co	example_poll.cpp	/^  stCoRoutine_t *co;$/;"	m	struct:task_t	file:
-co	example_specific.cpp	/^  stCoRoutine_t *co;$/;"	m	struct:stRoutineArgs_t	file:
+cnt	co_hook_sys_call.cpp	/^    size_t cnt;$/;"	m	struct:stCoSysEnvArr_t	file:
+co	co_routine.cpp	/^    stCoRoutine_t *co;$/;"	m	struct:stHookPThreadSpec_t	file:
+co	example_echosvr.cpp	/^    stCoRoutine_t *co;$/;"	m	struct:task_t	file:
+co	example_poll.cpp	/^    stCoRoutine_t *co;$/;"	m	struct:task_t	file:
+co	example_specific.cpp	/^    stCoRoutine_t *co;$/;"	m	struct:stRoutineArgs_t	file:
 co_accept	co_hook_sys_call.cpp	/^int co_accept(int fd, struct sockaddr *addr, socklen_t *len) {$/;"	f
 co_alloc_sharestack	co_routine.cpp	/^stShareStack_t *co_alloc_sharestack(int count, int stack_size) {$/;"	f
 co_alloc_stackmem	co_routine.cpp	/^stStackMem_t *co_alloc_stackmem(unsigned int stack_size) {$/;"	f
@@ -160,7 +160,7 @@ co_cond_timedwait	co_routine.cpp	/^int co_cond_timedwait(stCoCond_t *link, int m
 co_create	co_routine.cpp	/^int co_create(stCoRoutine_t **ppco, const stCoRoutineAttr_t *attr,$/;"	f
 co_create_env	co_routine.cpp	/^struct stCoRoutine_t *co_create_env(stCoRoutineEnv_t *env,$/;"	f
 co_disable_hook_sys	co_routine.cpp	/^void co_disable_hook_sys() {$/;"	f
-co_enable_hook_sys	co_hook_sys_call.cpp	/^void co_enable_hook_sys() \/\/这函数必须在这里,否则本文件会被忽略！！！$/;"	f
+co_enable_hook_sys	co_hook_sys_call.cpp	/^void co_enable_hook_sys()  \/\/这函数必须在这里,否则本文件会被忽略！！！$/;"	f
 co_epoll_create	co_epoll.cpp	/^int co_epoll_create(int size) { return epoll_create(size); }$/;"	f
 co_epoll_create	co_epoll.cpp	/^int co_epoll_create(int size) { return kqueue(); }$/;"	f
 co_epoll_ctl	co_epoll.cpp	/^int co_epoll_ctl(int epfd, int op, int fd, struct epoll_event *ev) {$/;"	f
@@ -202,7 +202,7 @@ coctx_param_t	coctx.h	/^struct coctx_param_t {$/;"	s
 coctx_pfn_t	coctx.h	/^typedef void *(*coctx_pfn_t)(void *s, void *s2);$/;"	t
 coctx_swap	coctx_swap.S	/^coctx_swap:$/;"	l
 coctx_t	coctx.h	/^struct coctx_t {$/;"	s
-col_size	co_epoll.cpp	/^  static const int col_size = 1024;$/;"	m	class:clsFdMap	file:
+col_size	co_epoll.cpp	/^    static const int col_size = 1024;$/;"	m	class:clsFdMap	file:
 comac_arg_n	co_closure.h	/^#define comac_arg_n(/;"	d
 comac_argc	co_closure.h	/^#define comac_argc(/;"	d
 comac_args_seqs	co_closure.h	/^#define comac_args_seqs(/;"	d
@@ -210,41 +210,41 @@ comac_get_args_cnt	co_closure.h	/^#define comac_get_args_cnt(/;"	d
 comac_join	co_closure.h	/^#define comac_join(/;"	d
 comac_join_1	co_closure.h	/^#define comac_join_1(/;"	d
 con_param_typeof	co_closure.h	/^#define con_param_typeof(/;"	d
-cond	example_cond.cpp	/^  stCoCond_t *cond;$/;"	m	struct:stEnv_t	file:
+cond	example_cond.cpp	/^    stCoCond_t *cond;$/;"	m	struct:stEnv_t	file:
 connect	co_hook_sys_call.cpp	/^int connect(int fd, const struct sockaddr *address, socklen_t address_len) {$/;"	f
 connect_pfn_t	co_hook_sys_call.cpp	/^typedef int (*connect_pfn_t)(int socket, const struct sockaddr *address,$/;"	t	file:
-count	co_routine_inner.h	/^  int count;$/;"	m	struct:stShareStack_t
+count	co_routine_inner.h	/^    int count;$/;"	m	struct:stShareStack_t
 counter	co_routine.cpp	/^static unsigned long long counter(void) {$/;"	f	file:
-ctx	co_routine_inner.h	/^  coctx_t ctx;$/;"	m	struct:stCoRoutine_t
-data	co_epoll.h	/^  epoll_data_t data;$/;"	m	struct:epoll_event
-data	co_hook_sys_call.cpp	/^  stCoSysEnv_t *data;$/;"	m	struct:stCoSysEnvArr_t	file:
+ctx	co_routine_inner.h	/^    coctx_t ctx;$/;"	m	struct:stCoRoutine_t
+data	co_epoll.h	/^    epoll_data_t data;$/;"	m	struct:epoll_event
+data	co_hook_sys_call.cpp	/^    stCoSysEnv_t *data;$/;"	m	struct:stCoSysEnvArr_t	file:
 decl_typeof	co_closure.h	/^#define decl_typeof(/;"	d
-dest	co_hook_sys_call.cpp	/^  struct sockaddr_in dest; \/\/ maybe sockaddr_un;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::sockaddr_in	file:
+dest	co_hook_sys_call.cpp	/^    struct sockaddr_in dest;  \/\/ maybe sockaddr_un;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::sockaddr_in	file:
 diff_ms	co_hook_sys_call.cpp	/^static inline ll64_t diff_ms(struct timeval &begin, struct timeval &end) {$/;"	f	file:
-domain	co_hook_sys_call.cpp	/^  int domain;              \/\/ AF_LOCAL , AF_INET$/;"	m	struct:rpchook_t	file:
+domain	co_hook_sys_call.cpp	/^    int domain;               \/\/ AF_LOCAL , AF_INET$/;"	m	struct:rpchook_t	file:
 dup_co_sysenv_arr	co_hook_sys_call.cpp	/^static stCoSysEnvArr_t *dup_co_sysenv_arr(stCoSysEnvArr_t *arr) {$/;"	f	file:
-eMaxTimeout	co_routine.cpp	/^    eMaxTimeout = 40 * 1000 \/\/ 40s$/;"	e	enum:stTimeoutItem_t::__anon1	file:
-env	co_routine_inner.h	/^  stCoRoutineEnv_t *env;$/;"	m	struct:stCoRoutine_t
+eMaxTimeout	co_routine.cpp	/^        eMaxTimeout = 40 * 1000  \/\/ 40s$/;"	e	enum:stTimeoutItem_t::__anon1	file:
+env	co_routine_inner.h	/^    stCoRoutineEnv_t *env;$/;"	m	struct:stCoRoutine_t
 epoll_data	co_epoll.h	/^typedef union epoll_data {$/;"	u
 epoll_data_t	co_epoll.h	/^} epoll_data_t;$/;"	t	typeref:union:epoll_data
 epoll_event	co_epoll.h	/^struct epoll_event {$/;"	s
-eventlist	co_epoll.h	/^  struct kevent *eventlist;$/;"	m	struct:co_epoll_res	typeref:struct:co_epoll_res::kevent
-events	co_epoll.cpp	/^  int events;$/;"	m	struct:kevent_pair_t	file:
-events	co_epoll.h	/^  struct epoll_event *events;$/;"	m	struct:co_epoll_res	typeref:struct:co_epoll_res::epoll_event
-events	co_epoll.h	/^  uint32_t events;$/;"	m	struct:epoll_event
+eventlist	co_epoll.h	/^    struct kevent *eventlist;$/;"	m	struct:co_epoll_res	typeref:struct:co_epoll_res::kevent
+events	co_epoll.cpp	/^    int events;$/;"	m	struct:kevent_pair_t	file:
+events	co_epoll.h	/^    struct epoll_event *events;$/;"	m	struct:co_epoll_res	typeref:struct:co_epoll_res::epoll_event
+events	co_epoll.h	/^    uint32_t events;$/;"	m	struct:epoll_event
 fcntl	co_hook_sys_call.cpp	/^int fcntl(int fildes, int cmd, ...) {$/;"	f
 fcntl_pfn_t	co_hook_sys_call.cpp	/^typedef int (*fcntl_pfn_t)(int fildes, int cmd, ...);$/;"	t	file:
-fd	co_epoll.h	/^  int fd;$/;"	m	union:epoll_data
-fd	example_echosvr.cpp	/^  int fd;$/;"	m	struct:task_t	file:
-fd	example_poll.cpp	/^  int fd;$/;"	m	struct:task_t	file:
-fds	co_routine.cpp	/^  struct pollfd *fds;$/;"	m	struct:stPoll_t	typeref:struct:stPoll_t::pollfd	file:
-fire_idx	co_epoll.cpp	/^  int fire_idx;$/;"	m	struct:kevent_pair_t	file:
+fd	co_epoll.h	/^    int fd;$/;"	m	union:epoll_data
+fd	example_echosvr.cpp	/^    int fd;$/;"	m	struct:task_t	file:
+fd	example_poll.cpp	/^    int fd;$/;"	m	struct:task_t	file:
+fds	co_routine.cpp	/^    struct pollfd *fds;$/;"	m	struct:stPoll_t	typeref:struct:stPoll_t::pollfd	file:
+fire_idx	co_epoll.cpp	/^    int fire_idx;$/;"	m	struct:kevent_pair_t	file:
 free_by_fd	co_hook_sys_call.cpp	/^static inline void free_by_fd(int fd) {$/;"	f	file:
 gCoEnvPerThread	co_routine.cpp	/^static __thread stCoRoutineEnv_t *gCoEnvPerThread = NULL;$/;"	v	file:
 g_co_sysenv	co_hook_sys_call.cpp	/^static stCoSysEnvArr_t g_co_sysenv = {0};$/;"	v	file:
 g_listen_fd	example_echosvr.cpp	/^static int g_listen_fd = -1;$/;"	v	file:
 g_readwrite	example_echosvr.cpp	/^static stack<task_t *> g_readwrite;$/;"	v	file:
-g_rpchook_socket_fd	co_hook_sys_call.cpp	/^static rpchook_t *g_rpchook_socket_fd[102400] = {0};$/;"	v	file:
+g_rpchook_socket_fd	co_hook_sys_call.cpp	/^static rpchook_t *g_rpchook_socket_fd[102400] = {0}; \/\/ fd -> rpchook_t$/;"	v	file:
 g_sys___poll_func	co_hook_sys_call.cpp	/^static __poll_pfn_t g_sys___poll_func =$/;"	v	file:
 g_sys___res_state_func	co_hook_sys_call.cpp	/^static __res_state_pfn_t g_sys___res_state_func =$/;"	v	file:
 g_sys_close_func	co_hook_sys_call.cpp	/^static close_pfn_t g_sys_close_func = (close_pfn_t)dlsym(RTLD_NEXT, "close");$/;"	v	file:
@@ -254,7 +254,7 @@ g_sys_getenv_func	co_hook_sys_call.cpp	/^static getenv_pfn_t g_sys_getenv_func =
 g_sys_gethostbyname_func	co_hook_sys_call.cpp	/^static gethostbyname_pfn_t g_sys_gethostbyname_func =$/;"	v	file:
 g_sys_gethostbyname_r_func	co_hook_sys_call.cpp	/^static gethostbyname_r_pfn_t g_sys_gethostbyname_r_func =$/;"	v	file:
 g_sys_poll_func	co_hook_sys_call.cpp	/^static poll_pfn_t g_sys_poll_func = (poll_pfn_t)dlsym(RTLD_NEXT, "poll");$/;"	v	file:
-g_sys_read_func	co_hook_sys_call.cpp	/^static read_pfn_t g_sys_read_func = (read_pfn_t)dlsym(RTLD_NEXT, "read");$/;"	v	file:
+g_sys_read_func	co_hook_sys_call.cpp	/^static read_pfn_t g_sys_read_func   = (read_pfn_t)dlsym(RTLD_NEXT, "read");$/;"	v	file:
 g_sys_recv_func	co_hook_sys_call.cpp	/^static recv_pfn_t g_sys_recv_func = (recv_pfn_t)dlsym(RTLD_NEXT, "recv");$/;"	v	file:
 g_sys_recvfrom_func	co_hook_sys_call.cpp	/^static recvfrom_pfn_t g_sys_recvfrom_func =$/;"	v	file:
 g_sys_send_func	co_hook_sys_call.cpp	/^static send_pfn_t g_sys_send_func = (send_pfn_t)dlsym(RTLD_NEXT, "send");$/;"	v	file:
@@ -264,7 +264,7 @@ g_sys_setsockopt_func	co_hook_sys_call.cpp	/^static setsockopt_pfn_t g_sys_setso
 g_sys_socket_func	co_hook_sys_call.cpp	/^static socket_pfn_t g_sys_socket_func =$/;"	v	file:
 g_sys_unsetenv_func	co_hook_sys_call.cpp	/^static unsetenv_pfn_t g_sys_unsetenv_func =$/;"	v	file:
 g_sys_write_func	co_hook_sys_call.cpp	/^static write_pfn_t g_sys_write_func = (write_pfn_t)dlsym(RTLD_NEXT, "write");$/;"	v	file:
-get	co_epoll.cpp	/^  inline void *get(int fd) {$/;"	f	class:clsFdMap
+get	co_epoll.cpp	/^    inline void *get(int fd) {$/;"	f	class:clsFdMap
 getCpuKhz	co_routine.cpp	/^static unsigned long long getCpuKhz() {$/;"	f	file:
 get_by_fd	co_hook_sys_call.cpp	/^static inline rpchook_t *get_by_fd(int fd) {$/;"	f	file:
 get_fd_map	co_epoll.cpp	/^static inline clsFdMap *get_fd_map() {$/;"	f	file:
@@ -275,47 +275,47 @@ gethostbyname	co_hook_sys_call.cpp	/^struct hostent *gethostbyname(const char *n
 gethostbyname_pfn_t	co_hook_sys_call.cpp	/^typedef hostent *(*gethostbyname_pfn_t)(const char *name);$/;"	t	file:
 gethostbyname_r	co_hook_sys_call.cpp	/^int gethostbyname_r(const char *__restrict name,$/;"	f
 gethostbyname_r_pfn_t	co_hook_sys_call.cpp	/^typedef int (*gethostbyname_r_pfn_t)(const char *__restrict name,$/;"	t	file:
-hPort	co_hook_sys_call.cpp	/^  unsigned short hPort;$/;"	m	struct:rpchook_connagent_head_t	file:
-head	co_routine.cpp	/^  stCoCondItem_t *head;$/;"	m	struct:stCoCond_t	file:
-head	co_routine.cpp	/^  stTimeoutItem_t *head;$/;"	m	struct:stTimeoutItemLink_t	file:
-host	co_hook_sys_call.cpp	/^  struct hostent host;$/;"	m	struct:hostbuf_wrap	typeref:struct:hostbuf_wrap::hostent	file:
-host_errno	co_hook_sys_call.cpp	/^  int host_errno;$/;"	m	struct:hostbuf_wrap	file:
+hPort	co_hook_sys_call.cpp	/^    unsigned short hPort;$/;"	m	struct:rpchook_connagent_head_t	file:
+head	co_routine.cpp	/^    stCoCondItem_t *head;$/;"	m	struct:stCoCond_t	file:
+head	co_routine.cpp	/^    stTimeoutItem_t *head;$/;"	m	struct:stTimeoutItemLink_t	file:
+host	co_hook_sys_call.cpp	/^    struct hostent host;$/;"	m	struct:hostbuf_wrap	typeref:struct:hostbuf_wrap::hostent	file:
+host_errno	co_hook_sys_call.cpp	/^    int host_errno;$/;"	m	struct:hostbuf_wrap	file:
 hostbuf_wrap	co_hook_sys_call.cpp	/^struct hostbuf_wrap {$/;"	s	file:
-iAllEventDetach	co_routine.cpp	/^  int iAllEventDetach;$/;"	m	struct:stPoll_t	file:
-iBodyLen	co_hook_sys_call.cpp	/^  unsigned int iBodyLen;$/;"	m	struct:rpchook_connagent_head_t	file:
-iBufferSize	co_hook_sys_call.cpp	/^  size_t iBufferSize;$/;"	m	struct:hostbuf_wrap	file:
-iCallStackSize	co_routine.cpp	/^  int iCallStackSize;$/;"	m	struct:stCoRoutineEnv_t	file:
-iEpollFd	co_routine.cpp	/^  int iEpollFd;$/;"	m	struct:stCoEpoll_t	file:
-iEpollFd	co_routine.cpp	/^  int iEpollFd;$/;"	m	struct:stPoll_t	file:
+iAllEventDetach	co_routine.cpp	/^    int iAllEventDetach;$/;"	m	struct:stPoll_t	file:
+iBodyLen	co_hook_sys_call.cpp	/^    unsigned int iBodyLen;$/;"	m	struct:rpchook_connagent_head_t	file:
+iBufferSize	co_hook_sys_call.cpp	/^    size_t iBufferSize;$/;"	m	struct:hostbuf_wrap	file:
+iCallStackSize	co_routine.cpp	/^    int iCallStackSize;$/;"	m	struct:stCoRoutineEnv_t	file:
+iEpollFd	co_routine.cpp	/^    int iEpollFd;$/;"	m	struct:stCoEpoll_t	file:
+iEpollFd	co_routine.cpp	/^    int iEpollFd;$/;"	m	struct:stPoll_t	file:
 iFailCnt	example_echocli.cpp	/^static int iFailCnt = 0;$/;"	v	file:
-iIP	co_hook_sys_call.cpp	/^  struct in_addr iIP;$/;"	m	struct:rpchook_connagent_head_t	typeref:struct:rpchook_connagent_head_t::in_addr	file:
-iItemSize	co_routine.cpp	/^  int iItemSize;$/;"	m	struct:stTimeout_t	file:
-iOssAttrID	co_hook_sys_call.cpp	/^  unsigned int iOssAttrID;$/;"	m	struct:rpchook_connagent_head_t	file:
-iRaiseCnt	co_routine.cpp	/^  int iRaiseCnt;$/;"	m	struct:stPoll_t	file:
-iRoutineID	example_setenv.cpp	/^  int iRoutineID;$/;"	m	struct:stRoutineArgs_t	file:
+iIP	co_hook_sys_call.cpp	/^    struct in_addr iIP;$/;"	m	struct:rpchook_connagent_head_t	typeref:struct:rpchook_connagent_head_t::in_addr	file:
+iItemSize	co_routine.cpp	/^    int iItemSize;$/;"	m	struct:stTimeout_t	file:
+iOssAttrID	co_hook_sys_call.cpp	/^    unsigned int iOssAttrID;$/;"	m	struct:rpchook_connagent_head_t	file:
+iRaiseCnt	co_routine.cpp	/^    int iRaiseCnt;$/;"	m	struct:stPoll_t	file:
+iRoutineID	example_setenv.cpp	/^    int iRoutineID;$/;"	m	struct:stRoutineArgs_t	file:
 iSuccCnt	example_echocli.cpp	/^static int iSuccCnt = 0;$/;"	v	file:
-iTime	example_echocli.cpp	/^static int iTime = 0;$/;"	v	file:
-id	example_cond.cpp	/^  int id;$/;"	m	struct:stTask_t	file:
-idx	example_specific.cpp	/^  int idx;$/;"	m	struct:stRoutineSpecificData_t	file:
+iTime	example_echocli.cpp	/^static int iTime    = 0;$/;"	v	file:
+id	example_cond.cpp	/^    int id;$/;"	m	struct:stTask_t	file:
+idx	example_specific.cpp	/^    int idx;$/;"	m	struct:stRoutineSpecificData_t	file:
 impl_typeof	co_closure.h	/^#define impl_typeof(/;"	d
 impl_typeof_cpy	co_closure.h	/^#define impl_typeof_cpy(/;"	d
-ip	example_echocli.cpp	/^  char *ip;$/;"	m	struct:stEndPoint	file:
-kEBP	coctx.cpp	/^  kEBP = 6,$/;"	e	enum:__anon3	file:
-kEIP	coctx.cpp	/^  kEIP = 0,$/;"	e	enum:__anon3	file:
-kESP	coctx.cpp	/^  kESP = 7,$/;"	e	enum:__anon3	file:
-kRDI	coctx.cpp	/^  kRDI = 7,$/;"	e	enum:__anon4	file:
-kRETAddr	coctx.cpp	/^  kRETAddr = 9,$/;"	e	enum:__anon4	file:
-kRSI	coctx.cpp	/^  kRSI = 8,$/;"	e	enum:__anon4	file:
-kRSP	coctx.cpp	/^  kRSP = 13,$/;"	e	enum:__anon4	file:
+ip	example_echocli.cpp	/^    char *ip;$/;"	m	struct:stEndPoint	file:
+kEBP	coctx.cpp	/^    kEBP = 6,$/;"	e	enum:__anon3	file:
+kEIP	coctx.cpp	/^    kEIP = 0,$/;"	e	enum:__anon3	file:
+kESP	coctx.cpp	/^    kESP = 7,$/;"	e	enum:__anon3	file:
+kRDI	coctx.cpp	/^    kRDI     = 7,$/;"	e	enum:__anon4	file:
+kRETAddr	coctx.cpp	/^    kRETAddr = 9,$/;"	e	enum:__anon4	file:
+kRSI	coctx.cpp	/^    kRSI     = 8,$/;"	e	enum:__anon4	file:
+kRSP	coctx.cpp	/^    kRSP     = 13,$/;"	e	enum:__anon4	file:
 kevent_pair_t	co_epoll.cpp	/^struct kevent_pair_t {$/;"	s	file:
 ll64_t	co_hook_sys_call.cpp	/^typedef long long ll64_t;$/;"	t	file:
-llStartIdx	co_routine.cpp	/^  long long llStartIdx;$/;"	m	struct:stTimeout_t	file:
+llStartIdx	co_routine.cpp	/^    long long llStartIdx;$/;"	m	struct:stTimeout_t	file:
 localtime_r_pfn_t	co_hook_sys_call.cpp	/^typedef struct tm *(*localtime_r_pfn_t)(const time_t *timep, struct tm *result);$/;"	t	typeref:struct:localtime_r_pfn_t	file:
 loop	example_thread.cpp	/^int loop(void *) { return 0; }$/;"	f
-m_iWaitItemCnt	co_comm.h	/^  int m_iWaitItemCnt;$/;"	m	class:clsCoMutex
-m_pp	co_epoll.cpp	/^  void **m_pp[1024];$/;"	m	class:clsFdMap	file:
-m_ptCondSignal	co_comm.h	/^  stCoCond_t *m_ptCondSignal;$/;"	m	class:clsCoMutex
-m_ptMutex	co_comm.h	/^  clsCoMutex *m_ptMutex;$/;"	m	class:clsSmartLock
+m_iWaitItemCnt	co_comm.h	/^    int m_iWaitItemCnt;$/;"	m	class:clsCoMutex
+m_pp	co_epoll.cpp	/^    void **m_pp[1024];$/;"	m	class:clsFdMap	file:
+m_ptCondSignal	co_comm.h	/^    stCoCond_t *m_ptCondSignal;$/;"	m	class:clsCoMutex
+m_ptMutex	co_comm.h	/^    clsCoMutex *m_ptMutex;$/;"	m	class:clsSmartLock
 main	example_closure.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	example_cond.cpp	/^int main() {$/;"	f
 main	example_copystack.cpp	/^int main() {$/;"	f
@@ -325,53 +325,53 @@ main	example_poll.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	example_setenv.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	example_specific.cpp	/^int main() {$/;"	f
 main	example_thread.cpp	/^int main(int argc, char *argv[]) {$/;"	f
-name	co_hook_sys_call.cpp	/^  char *name;$/;"	m	struct:stCoSysEnv_t	file:
-nfds	co_routine.cpp	/^  nfds_t nfds; \/\/ typedef unsigned long int nfds_t;$/;"	m	struct:stPoll_t	file:
-occupy_co	co_routine.cpp	/^  stCoRoutine_t *occupy_co;$/;"	m	struct:stCoRoutineEnv_t	file:
-occupy_co	co_routine_inner.h	/^  stCoRoutine_t *occupy_co;$/;"	m	struct:stStackMem_t
-pArg	co_routine.cpp	/^  void *pArg; \/\/ routine$/;"	m	struct:stTimeoutItem_t	file:
-pCallStack	co_routine.cpp	/^  stCoRoutine_t *pCallStack[128];$/;"	m	struct:stCoRoutineEnv_t	file:
-pEpoll	co_routine.cpp	/^  stCoEpoll_t *pEpoll;$/;"	m	struct:stCoRoutineEnv_t	file:
-pItems	co_routine.cpp	/^  stTimeoutItemLink_t *pItems;$/;"	m	struct:stTimeout_t	file:
-pLink	co_routine.cpp	/^  stCoCond_t *pLink;$/;"	m	struct:stCoCondItem_t	file:
-pLink	co_routine.cpp	/^  stTimeoutItemLink_t *pLink;$/;"	m	struct:stTimeoutItem_t	file:
-pNext	co_routine.cpp	/^  stCoCondItem_t *pNext;$/;"	m	struct:stCoCondItem_t	file:
-pNext	co_routine.cpp	/^  stTimeoutItem_t *pNext;$/;"	m	struct:stTimeoutItem_t	file:
-pPoll	co_routine.cpp	/^  stPoll_t *pPoll;$/;"	m	struct:stPollItem_t	file:
-pPollItems	co_routine.cpp	/^  stPollItem_t *pPollItems;$/;"	m	struct:stPoll_t	file:
-pPrev	co_routine.cpp	/^  stCoCondItem_t *pPrev;$/;"	m	struct:stCoCondItem_t	file:
-pPrev	co_routine.cpp	/^  stTimeoutItem_t *pPrev;$/;"	m	struct:stTimeoutItem_t	file:
-pSelf	co_routine.cpp	/^  struct pollfd *pSelf;$/;"	m	struct:stPollItem_t	typeref:struct:stPollItem_t::pollfd	file:
-pTimeout	co_routine.cpp	/^  struct stTimeout_t *pTimeout;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeout_t	file:
+name	co_hook_sys_call.cpp	/^    char *name;$/;"	m	struct:stCoSysEnv_t	file:
+nfds	co_routine.cpp	/^    nfds_t nfds;  \/\/ typedef unsigned long int nfds_t;$/;"	m	struct:stPoll_t	file:
+occupy_co	co_routine.cpp	/^    stCoRoutine_t *occupy_co;$/;"	m	struct:stCoRoutineEnv_t	file:
+occupy_co	co_routine_inner.h	/^    stCoRoutine_t *occupy_co;$/;"	m	struct:stStackMem_t
+pArg	co_routine.cpp	/^    void *pArg;  \/\/ routine$/;"	m	struct:stTimeoutItem_t	file:
+pCallStack	co_routine.cpp	/^    stCoRoutine_t *pCallStack[128];$/;"	m	struct:stCoRoutineEnv_t	file:
+pEpoll	co_routine.cpp	/^    stCoEpoll_t *pEpoll;$/;"	m	struct:stCoRoutineEnv_t	file:
+pItems	co_routine.cpp	/^    stTimeoutItemLink_t *pItems;$/;"	m	struct:stTimeout_t	file:
+pLink	co_routine.cpp	/^    stCoCond_t *pLink;$/;"	m	struct:stCoCondItem_t	file:
+pLink	co_routine.cpp	/^    stTimeoutItemLink_t *pLink;$/;"	m	struct:stTimeoutItem_t	file:
+pNext	co_routine.cpp	/^    stCoCondItem_t *pNext;$/;"	m	struct:stCoCondItem_t	file:
+pNext	co_routine.cpp	/^    stTimeoutItem_t *pNext;$/;"	m	struct:stTimeoutItem_t	file:
+pPoll	co_routine.cpp	/^    stPoll_t *pPoll;$/;"	m	struct:stPollItem_t	file:
+pPollItems	co_routine.cpp	/^    stPollItem_t *pPollItems;$/;"	m	struct:stPoll_t	file:
+pPrev	co_routine.cpp	/^    stCoCondItem_t *pPrev;$/;"	m	struct:stCoCondItem_t	file:
+pPrev	co_routine.cpp	/^    stTimeoutItem_t *pPrev;$/;"	m	struct:stTimeoutItem_t	file:
+pSelf	co_routine.cpp	/^    struct pollfd *pSelf;$/;"	m	struct:stPollItem_t	typeref:struct:stPollItem_t::pollfd	file:
+pTimeout	co_routine.cpp	/^    struct stTimeout_t *pTimeout;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeout_t	file:
 param_init_typeof	co_closure.h	/^#define param_init_typeof(/;"	d
-pending_co	co_routine.cpp	/^  stCoRoutine_t *pending_co;$/;"	m	struct:stCoRoutineEnv_t	file:
-pfn	co_routine_inner.h	/^  pfn_co_routine_t pfn;$/;"	m	struct:stCoRoutine_t
+pending_co	co_routine.cpp	/^    stCoRoutine_t *pending_co;$/;"	m	struct:stCoRoutineEnv_t	file:
+pfn	co_routine_inner.h	/^    pfn_co_routine_t pfn;$/;"	m	struct:stCoRoutine_t
 pfnCoRoutineFunc_t	co_routine_inner.h	/^typedef void (*pfnCoRoutineFunc_t)();$/;"	t
-pfnPrepare	co_routine.cpp	/^  OnPreparePfn_t pfnPrepare;$/;"	m	struct:stTimeoutItem_t	file:
-pfnProcess	co_routine.cpp	/^  OnProcessPfn_t pfnProcess;$/;"	m	struct:stTimeoutItem_t	file:
+pfnPrepare	co_routine.cpp	/^    OnPreparePfn_t pfnPrepare;$/;"	m	struct:stTimeoutItem_t	file:
+pfnProcess	co_routine.cpp	/^    OnProcessPfn_t pfnProcess;$/;"	m	struct:stTimeoutItem_t	file:
 pfn_co_eventloop_t	co_routine.h	/^typedef int (*pfn_co_eventloop_t)(void *);$/;"	t
 pfn_co_routine_t	co_routine.h	/^typedef void *(*pfn_co_routine_t)(void *);$/;"	t
-poll	co_hook_sys_call.cpp	/^int poll(struct pollfd fds[], nfds_t nfds, int timeout) \/\/ 监控fd$/;"	f
+poll	co_hook_sys_call.cpp	/^int poll(struct pollfd fds[], nfds_t nfds, int timeout)  \/\/ 监控fd$/;"	f
 poll_pfn_t	co_hook_sys_call.cpp	/^typedef int (*poll_pfn_t)(struct pollfd fds[], nfds_t nfds, int timeout);$/;"	t	file:
 poll_pfn_t	co_routine.cpp	/^typedef int (*poll_pfn_t)(struct pollfd fds[], nfds_t nfds, int timeout);$/;"	t	file:
 poll_routine	example_poll.cpp	/^static void *poll_routine(void *arg) {$/;"	f	file:
-port	example_echocli.cpp	/^  unsigned short int port;$/;"	m	struct:stEndPoint	file:
-pstActiveList	co_routine.cpp	/^  struct stTimeoutItemLink_t *pstActiveList;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeoutItemLink_t	file:
-pstTimeoutList	co_routine.cpp	/^  struct stTimeoutItemLink_t *pstTimeoutList;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeoutItemLink_t	file:
+port	example_echocli.cpp	/^    unsigned short int port;$/;"	m	struct:stEndPoint	file:
+pstActiveList	co_routine.cpp	/^    struct stTimeoutItemLink_t *pstActiveList;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeoutItemLink_t	file:
+pstTimeoutList	co_routine.cpp	/^    struct stTimeoutItemLink_t *pstTimeoutList;$/;"	m	struct:stCoEpoll_t	typeref:struct:stCoEpoll_t::stTimeoutItemLink_t	file:
 pthread_getspecific_pfn_t	co_hook_sys_call.cpp	/^typedef void *(*pthread_getspecific_pfn_t)(pthread_key_t key);$/;"	t	file:
 pthread_setspecific_pfn_t	co_hook_sys_call.cpp	/^typedef int (*pthread_setspecific_pfn_t)(pthread_key_t key, const void *value);$/;"	t	file:
-ptr	co_epoll.h	/^  void *ptr;$/;"	m	union:epoll_data
-pvEnv	co_routine_inner.h	/^  void *pvEnv;$/;"	m	struct:stCoRoutine_t
+ptr	co_epoll.h	/^    void *ptr;$/;"	m	union:epoll_data
+pvEnv	co_routine_inner.h	/^    void *pvEnv;$/;"	m	struct:stCoRoutine_t
 read	co_hook_sys_call.cpp	/^ssize_t read(int fd, void *buf, size_t nbyte) {$/;"	f
 read_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*read_pfn_t)(int fildes, void *buf, size_t nbyte);$/;"	t	file:
-read_timeout	co_hook_sys_call.cpp	/^  struct timeval read_timeout;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::timeval	file:
+read_timeout	co_hook_sys_call.cpp	/^    struct timeval read_timeout;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::timeval	file:
 readwrite_routine	example_echocli.cpp	/^static void *readwrite_routine(void *arg) {$/;"	f	file:
 readwrite_routine	example_echosvr.cpp	/^static void *readwrite_routine(void *arg) {$/;"	f	file:
 recv	co_hook_sys_call.cpp	/^ssize_t recv(int socket, void *buffer, size_t length, int flags) {$/;"	f
 recv_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*recv_pfn_t)(int socket, void *buffer, size_t length,$/;"	t	file:
 recvfrom	co_hook_sys_call.cpp	/^ssize_t recvfrom(int socket, void *buffer, size_t length, int flags,$/;"	f
 recvfrom_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*recvfrom_pfn_t)(int socket, void *buffer, size_t length,$/;"	t	file:
-regs	coctx.h	/^  void *regs[8];$/;"	m	struct:coctx_t
+regs	coctx.h	/^    void *regs[8];$/;"	m	struct:coctx_t
 repeat	co_closure.h	/^#define repeat(/;"	d
 repeat_0	co_closure.h	/^#define repeat_0(/;"	d
 repeat_1	co_closure.h	/^#define repeat_1(/;"	d
@@ -381,41 +381,41 @@ repeat_4	co_closure.h	/^#define repeat_4(/;"	d
 repeat_5	co_closure.h	/^#define repeat_5(/;"	d
 repeat_6	co_closure.h	/^#define repeat_6(/;"	d
 res_state_wrap	co_hook_sys_call.cpp	/^struct res_state_wrap {$/;"	s	file:
-result	co_routine.cpp	/^  co_epoll_res *result;$/;"	m	struct:stCoEpoll_t	file:
+result	co_routine.cpp	/^    co_epoll_res *result;$/;"	m	struct:stCoEpoll_t	file:
 routine_func	example_thread.cpp	/^static void *routine_func(void *) {$/;"	f	file:
-routine_id	example_specific.cpp	/^  int routine_id;$/;"	m	struct:stRoutineArgs_t	file:
-row_size	co_epoll.cpp	/^  static const int row_size = 1024;$/;"	m	class:clsFdMap	file:
+routine_id	example_specific.cpp	/^    int routine_id;$/;"	m	struct:stRoutineArgs_t	file:
+row_size	co_epoll.cpp	/^    static const int row_size = 1024;$/;"	m	class:clsFdMap	file:
 rpchook_connagent_head_t	co_hook_sys_call.cpp	/^struct rpchook_connagent_head_t {$/;"	s	file:
 rpchook_t	co_hook_sys_call.cpp	/^struct rpchook_t {$/;"	s	file:
-s1	coctx.h	/^  const void *s1;$/;"	m	struct:coctx_param_t
-s2	coctx.h	/^  const void *s2;$/;"	m	struct:coctx_param_t
-sReserved	co_hook_sys_call.cpp	/^  unsigned char sReserved[6];$/;"	m	struct:rpchook_connagent_head_t	file:
+s1	coctx.h	/^    const void *s1;$/;"	m	struct:coctx_param_t
+s2	coctx.h	/^    const void *s2;$/;"	m	struct:coctx_param_t
+sReserved	co_hook_sys_call.cpp	/^    unsigned char sReserved[6];$/;"	m	struct:rpchook_connagent_head_t	file:
 s_fd_map	co_epoll.cpp	/^__thread clsFdMap *s_fd_map = NULL;$/;"	v
-save_buffer	co_routine_inner.h	/^  char *save_buffer;$/;"	m	struct:stCoRoutine_t
-save_size	co_routine_inner.h	/^  unsigned int save_size;$/;"	m	struct:stCoRoutine_t
+save_buffer	co_routine_inner.h	/^    char *save_buffer;$/;"	m	struct:stCoRoutine_t
+save_size	co_routine_inner.h	/^    unsigned int save_size;$/;"	m	struct:stCoRoutine_t
 save_stack_buffer	co_routine.cpp	/^void save_stack_buffer(stCoRoutine_t *occupy_co) {$/;"	f
 send	co_hook_sys_call.cpp	/^ssize_t send(int socket, const void *buffer, size_t length, int flags) {$/;"	f
 send_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*send_pfn_t)(int socket, const void *buffer, size_t length,$/;"	t	file:
 sendto	co_hook_sys_call.cpp	/^ssize_t sendto(int socket, const void *message, size_t length, int flags,$/;"	f
 sendto_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*sendto_pfn_t)(int socket, const void *message, size_t length,$/;"	t	file:
-set	co_epoll.cpp	/^  inline int set(int fd, const void *ptr) {$/;"	f	class:clsFdMap
+set	co_epoll.cpp	/^    inline int set(int fd, const void *ptr) {$/;"	f	class:clsFdMap
 setenv	co_hook_sys_call.cpp	/^int setenv(const char *n, const char *value, int overwrite) {$/;"	f
 setenv_pfn_t	co_hook_sys_call.cpp	/^typedef int (*setenv_pfn_t)(const char *name, const char *value, int overwrite);$/;"	t	file:
 setsockopt	co_hook_sys_call.cpp	/^int setsockopt(int fd, int level, int option_name, const void *option_value,$/;"	f
 setsockopt_pfn_t	co_hook_sys_call.cpp	/^typedef int (*setsockopt_pfn_t)(int socket, int level, int option_name,$/;"	t	file:
-share_stack	co_routine.h	/^  stShareStack_t *share_stack;$/;"	m	struct:stCoRoutineAttr_t
-size	co_epoll.h	/^  int size;$/;"	m	struct:co_epoll_res
-size	co_routine.cpp	/^  enum { size = 1024 };$/;"	e	enum:stHookPThreadSpec_t::__anon2	file:
+share_stack	co_routine.h	/^    stShareStack_t *share_stack;$/;"	m	struct:stCoRoutineAttr_t
+size	co_epoll.h	/^    int size;$/;"	m	struct:co_epoll_res
+size	co_routine.cpp	/^    enum { size = 1024 };$/;"	e	enum:stHookPThreadSpec_t::__anon2	file:
 socket	co_hook_sys_call.cpp	/^int socket(int domain, int type, int protocol) {$/;"	f
 socket_pfn_t	co_hook_sys_call.cpp	/^typedef int (*socket_pfn_t)(int domain, int type, int protocol);$/;"	t	file:
-ss_size	coctx.h	/^  size_t ss_size;$/;"	m	struct:coctx_t
-ss_sp	coctx.h	/^  char *ss_sp;$/;"	m	struct:coctx_t
+ss_size	coctx.h	/^    size_t ss_size;$/;"	m	struct:coctx_t
+ss_sp	coctx.h	/^    char *ss_sp;$/;"	m	struct:coctx_t
 stCoClosure_t	co_closure.h	/^struct stCoClosure_t {$/;"	s
 stCoCondItem_t	co_routine.cpp	/^struct stCoCondItem_t {$/;"	s	file:
 stCoCond_t	co_routine.cpp	/^struct stCoCond_t {$/;"	s	file:
 stCoEpoll_t	co_routine.cpp	/^struct stCoEpoll_t {$/;"	s	file:
-stCoRoutineAttr_t	co_routine.h	/^  stCoRoutineAttr_t() {$/;"	f	struct:stCoRoutineAttr_t
-stCoRoutineAttr_t	co_routine.h	/^struct stCoRoutineAttr_t \/\/协程配置，例如栈的大小$/;"	s
+stCoRoutineAttr_t	co_routine.h	/^    stCoRoutineAttr_t() {$/;"	f	struct:stCoRoutineAttr_t
+stCoRoutineAttr_t	co_routine.h	/^struct stCoRoutineAttr_t  \/\/协程配置，例如栈的大小$/;"	s
 stCoRoutineEnv_t	co_routine.cpp	/^struct stCoRoutineEnv_t {$/;"	s	file:
 stCoRoutine_t	co_routine_inner.h	/^struct stCoRoutine_t {$/;"	s
 stCoSpec_t	co_routine_inner.h	/^struct stCoSpec_t {$/;"	s
@@ -423,7 +423,7 @@ stCoSysEnvArr_t	co_hook_sys_call.cpp	/^struct stCoSysEnvArr_t {$/;"	s	file:
 stCoSysEnv_t	co_hook_sys_call.cpp	/^struct stCoSysEnv_t {$/;"	s	file:
 stEndPoint	example_echocli.cpp	/^struct stEndPoint {$/;"	s	file:
 stEnv_t	example_cond.cpp	/^struct stEnv_t {$/;"	s	file:
-stEvent	co_routine.cpp	/^  struct epoll_event stEvent;$/;"	m	struct:stPollItem_t	typeref:struct:stPollItem_t::epoll_event	file:
+stEvent	co_routine.cpp	/^    struct epoll_event stEvent;$/;"	m	struct:stPollItem_t	typeref:struct:stPollItem_t::epoll_event	file:
 stHookPThreadSpec_t	co_routine.cpp	/^struct stHookPThreadSpec_t {$/;"	s	file:
 stPollItem_t	co_routine.cpp	/^struct stPollItem_t : public stTimeoutItem_t {$/;"	s	file:
 stPoll_t	co_routine.cpp	/^struct stPoll_t : public stTimeoutItem_t {$/;"	s	file:
@@ -436,39 +436,39 @@ stTask_t	example_cond.cpp	/^struct stTask_t {$/;"	s	file:
 stTimeoutItemLink_t	co_routine.cpp	/^struct stTimeoutItemLink_t {$/;"	s	file:
 stTimeoutItem_t	co_routine.cpp	/^struct stTimeoutItem_t {$/;"	s	file:
 stTimeout_t	co_routine.cpp	/^struct stTimeout_t {$/;"	s	file:
-stack_array	co_routine_inner.h	/^  stStackMem_t **stack_array;$/;"	m	struct:stShareStack_t
-stack_bp	co_routine_inner.h	/^  char *stack_bp; \/\/ stack_buffer + stack_size$/;"	m	struct:stStackMem_t
-stack_buffer	co_routine_inner.h	/^  char *stack_buffer;$/;"	m	struct:stStackMem_t
-stack_mem	co_routine_inner.h	/^  stStackMem_t *stack_mem;$/;"	m	struct:stCoRoutine_t
-stack_size	co_routine.h	/^  int stack_size;$/;"	m	struct:stCoRoutineAttr_t
-stack_size	co_routine_inner.h	/^  int stack_size;$/;"	m	struct:stShareStack_t
-stack_size	co_routine_inner.h	/^  int stack_size;$/;"	m	struct:stStackMem_t
-stack_sp	co_routine_inner.h	/^  char *stack_sp;$/;"	m	struct:stCoRoutine_t
-state	co_hook_sys_call.cpp	/^  struct __res_state state;$/;"	m	struct:res_state_wrap	typeref:struct:res_state_wrap::__res_state	file:
-tail	co_routine.cpp	/^  stCoCondItem_t *tail;$/;"	m	struct:stCoCond_t	file:
-tail	co_routine.cpp	/^  stTimeoutItem_t *tail;$/;"	m	struct:stTimeoutItemLink_t	file:
-task_queue	example_cond.cpp	/^  queue<stTask_t *> task_queue;$/;"	m	struct:stEnv_t	file:
+stack_array	co_routine_inner.h	/^    stStackMem_t **stack_array;$/;"	m	struct:stShareStack_t
+stack_bp	co_routine_inner.h	/^    char *stack_bp;  \/\/ stack_buffer + stack_size$/;"	m	struct:stStackMem_t
+stack_buffer	co_routine_inner.h	/^    char *stack_buffer;$/;"	m	struct:stStackMem_t
+stack_mem	co_routine_inner.h	/^    stStackMem_t *stack_mem;$/;"	m	struct:stCoRoutine_t
+stack_size	co_routine.h	/^    int stack_size;$/;"	m	struct:stCoRoutineAttr_t
+stack_size	co_routine_inner.h	/^    int stack_size;$/;"	m	struct:stShareStack_t
+stack_size	co_routine_inner.h	/^    int stack_size;$/;"	m	struct:stStackMem_t
+stack_sp	co_routine_inner.h	/^    char *stack_sp;$/;"	m	struct:stCoRoutine_t
+state	co_hook_sys_call.cpp	/^    struct __res_state state;$/;"	m	struct:res_state_wrap	typeref:struct:res_state_wrap::__res_state	file:
+tail	co_routine.cpp	/^    stCoCondItem_t *tail;$/;"	m	struct:stCoCond_t	file:
+tail	co_routine.cpp	/^    stTimeoutItem_t *tail;$/;"	m	struct:stTimeoutItemLink_t	file:
+task_queue	example_cond.cpp	/^    queue<stTask_t *> task_queue;$/;"	m	struct:stEnv_t	file:
 task_t	example_echosvr.cpp	/^struct task_t {$/;"	s	file:
 task_t	example_poll.cpp	/^struct task_t {$/;"	s	file:
 thread_func	example_closure.cpp	/^static void *thread_func(void *arg) {$/;"	f	file:
-timeout	co_routine.cpp	/^  stTimeoutItem_t timeout;$/;"	m	struct:stCoCondItem_t	file:
-u32	co_epoll.h	/^  uint32_t u32;$/;"	m	union:epoll_data
-u64	co_epoll.cpp	/^  uint64_t u64;$/;"	m	struct:kevent_pair_t	file:
-u64	co_epoll.h	/^  uint64_t u64;$/;"	m	union:epoll_data
-ullExpireTime	co_routine.cpp	/^  unsigned long long ullExpireTime;$/;"	m	struct:stTimeoutItem_t	file:
-ullStart	co_routine.cpp	/^  unsigned long long ullStart;$/;"	m	struct:stTimeout_t	file:
+timeout	co_routine.cpp	/^    stTimeoutItem_t timeout;$/;"	m	struct:stCoCondItem_t	file:
+u32	co_epoll.h	/^    uint32_t u32;$/;"	m	union:epoll_data
+u64	co_epoll.cpp	/^    uint64_t u64;$/;"	m	struct:kevent_pair_t	file:
+u64	co_epoll.h	/^    uint64_t u64;$/;"	m	union:epoll_data
+ullExpireTime	co_routine.cpp	/^    unsigned long long ullExpireTime;$/;"	m	struct:stTimeoutItem_t	file:
+ullStart	co_routine.cpp	/^    unsigned long long ullStart;$/;"	m	struct:stTimeout_t	file:
 unsetenv	co_hook_sys_call.cpp	/^int unsetenv(const char *n) {$/;"	f
 unsetenv_pfn_t	co_hook_sys_call.cpp	/^typedef int (*unsetenv_pfn_t)(const char *name);$/;"	t	file:
-user_flag	co_hook_sys_call.cpp	/^  int user_flag;$/;"	m	struct:rpchook_t	file:
+user_flag	co_hook_sys_call.cpp	/^    int user_flag;$/;"	m	struct:rpchook_t	file:
 v	Makefile	/^v=debug$/;"	m
-value	co_hook_sys_call.cpp	/^  char *value;$/;"	m	struct:stCoSysEnv_t	file:
-value	co_routine.cpp	/^  void *value;$/;"	m	struct:stHookPThreadSpec_t	file:
-value	co_routine_inner.h	/^  void *value;$/;"	m	struct:stCoSpec_t
+value	co_hook_sys_call.cpp	/^    char *value;$/;"	m	struct:stCoSysEnv_t	file:
+value	co_routine.cpp	/^    void *value;$/;"	m	struct:stHookPThreadSpec_t	file:
+value	co_routine_inner.h	/^    void *value;$/;"	m	struct:stCoSpec_t
 version	Makefile	/^version=0.5$/;"	m
 write	co_hook_sys_call.cpp	/^ssize_t write(int fd, const void *buf, size_t nbyte) {$/;"	f
 write_pfn_t	co_hook_sys_call.cpp	/^typedef ssize_t (*write_pfn_t)(int fildes, const void *buf, size_t nbyte);$/;"	t	file:
-write_timeout	co_hook_sys_call.cpp	/^  struct timeval write_timeout;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::timeval	file:
+write_timeout	co_hook_sys_call.cpp	/^    struct timeval write_timeout;$/;"	m	struct:rpchook_t	typeref:struct:rpchook_t::timeval	file:
 ~clsCoMutex	co_comm.cpp	/^clsCoMutex::~clsCoMutex() { co_cond_free(m_ptCondSignal); }$/;"	f	class:clsCoMutex
-~clsFdMap	co_epoll.cpp	/^  ~clsFdMap() {$/;"	f	class:clsFdMap
-~clsSmartLock	co_comm.h	/^  ~clsSmartLock() { m_ptMutex->CoUnLock(); }$/;"	f	class:clsSmartLock
-~stCoClosure_t	co_closure.h	/^  virtual ~stCoClosure_t() {}$/;"	f	struct:stCoClosure_t
+~clsFdMap	co_epoll.cpp	/^    ~clsFdMap() {$/;"	f	class:clsFdMap
+~clsSmartLock	co_comm.h	/^    ~clsSmartLock() { m_ptMutex->CoUnLock(); }$/;"	f	class:clsSmartLock
+~stCoClosure_t	co_closure.h	/^    virtual ~stCoClosure_t() {}$/;"	f	struct:stCoClosure_t

@@ -46,6 +46,7 @@ available.
 
 typedef long long ll64_t;
 
+// rpchook_t用来记录被协程hook的fd的信息
 struct rpchook_t {
     int user_flag;
     struct sockaddr_in dest;  // maybe sockaddr_un;
@@ -58,7 +59,7 @@ static inline pid_t GetPid() {
     char **p = (char **)pthread_self();
     return p ? *(pid_t *)(p + 18) : getpid();
 }
-static rpchook_t *g_rpchook_socket_fd[102400] = {0};
+static rpchook_t *g_rpchook_socket_fd[102400] = {0}; // fd -> rpchook_t
 
 typedef int (*socket_pfn_t)(int domain, int type, int protocol);
 typedef int (*connect_pfn_t)(int socket, const struct sockaddr *address,
@@ -204,6 +205,7 @@ static inline rpchook_t *get_by_fd(int fd) {
 static inline rpchook_t *alloc_by_fd(int fd) {
     if (fd > -1 && fd < (int)sizeof(g_rpchook_socket_fd) /
                             (int)sizeof(g_rpchook_socket_fd[0])) {
+        // fd在接管范围内，分配一个hook的管理结构
         rpchook_t *lp            = (rpchook_t *)calloc(1, sizeof(rpchook_t));
         lp->read_timeout.tv_sec  = 1;
         lp->write_timeout.tv_sec = 1;
@@ -226,17 +228,21 @@ static inline void free_by_fd(int fd) {
 int socket(int domain, int type, int protocol) {
     HOOK_SYS_FUNC(socket);
 
+    // 没有启动hook，直接调用系统接口后返回, socket()这个接口本身没有阻塞逻辑
     if (!co_is_enable_sys_hook()) {
         return g_sys_socket_func(domain, type, protocol);
     }
+    // 开启了hook
+    // 调用系统的socket()接口
     int fd = g_sys_socket_func(domain, type, protocol);
     if (fd < 0) {
         return fd;
     }
-
+    // 分配hook实例
     rpchook_t *lp = alloc_by_fd(fd);
     lp->domain    = domain;
 
+    // 内部设置了non-block
     fcntl(fd, F_SETFL, g_sys_fcntl_func(fd, F_GETFL, 0));
 
     return fd;
@@ -253,6 +259,7 @@ int co_accept(int fd, struct sockaddr *addr, socklen_t *len) {
 int connect(int fd, const struct sockaddr *address, socklen_t address_len) {
     HOOK_SYS_FUNC(connect);
 
+    // 没有启用协程的时候直接调用系统接口
     if (!co_is_enable_sys_hook()) {
         return g_sys_connect_func(fd, address, address_len);
     }
@@ -266,6 +273,7 @@ int connect(int fd, const struct sockaddr *address, socklen_t address_len) {
     if (sizeof(lp->dest) >= address_len) {
         memcpy(&(lp->dest), address, (int)address_len);
     }
+    // 用户自己调用了non-block
     if (O_NONBLOCK & lp->user_flag) {
         return ret;
     }
@@ -323,7 +331,10 @@ int close(int fd) {
 
     return ret;
 }
+
+
 ssize_t read(int fd, void *buf, size_t nbyte) {
+    // why ?
     HOOK_SYS_FUNC(read);
 
     if (!co_is_enable_sys_hook()) {
@@ -331,10 +342,12 @@ ssize_t read(int fd, void *buf, size_t nbyte) {
     }
     rpchook_t *lp = get_by_fd(fd);
 
+    // fd已经启用了非阻塞，直接调用系统接口，因为非阻塞意味着上层逻辑会是兼容非阻塞的读模式
     if (!lp || (O_NONBLOCK & lp->user_flag)) {
         ssize_t ret = g_sys_read_func(fd, buf, nbyte);
         return ret;
     }
+    // ms级超时
     int timeout =
         (lp->read_timeout.tv_sec * 1000) + (lp->read_timeout.tv_usec / 1000);
 
@@ -342,8 +355,10 @@ ssize_t read(int fd, void *buf, size_t nbyte) {
     pf.fd            = fd;
     pf.events        = (POLLIN | POLLERR | POLLHUP);
 
+    // 调用poll，注册event-loop事件，然后yeild
     int pollret = poll(&pf, 1, timeout);
 
+    // 此时有数据可读了，从内核读到应用层
     ssize_t readret = g_sys_read_func(fd, (char *)buf, nbyte);
 
     if (readret < 0) {
@@ -540,18 +555,24 @@ ssize_t recv(int socket, void *buffer, size_t length, int flags) {
 extern int co_poll_inner(stCoEpoll_t *ctx, struct pollfd fds[], nfds_t nfds,
                          int timeout, poll_pfn_t pollfunc);
 
+// 所有io hook都会调用该接口：1）添加epoll时间；2）添加超时事件；3）让出cpu给父协程
+// poll 机制
+// 为什么也需要hook呢，因为有些应用程序也使用了poll机制
 int poll(struct pollfd fds[], nfds_t nfds, int timeout)  // 监控fd
 {
     HOOK_SYS_FUNC(poll);
 
+    // 没有启用hook，直接调用系统接口
+    // 启用hook但没有设置超时，也直接调用系统接口，因为该接口不会阻塞
     if (!co_is_enable_sys_hook() || timeout == 0) {
         return g_sys_poll_func(fds, nfds, timeout);
     }
     pollfd *fds_merge = NULL;
     nfds_t nfds_merge = 0;
-    std::map<int, int> m;  // fd --> idx
+    std::map<int, int> m;  // fd --> idx，用于使用fd找到对应的fds_merge[idx]
     std::map<int, int>::iterator it;
     if (nfds > 1) {
+        // dfs中可能存在重复的fd（不同事件），这里做一个合并
         fds_merge = (pollfd *)malloc(sizeof(pollfd) * nfds);
         for (size_t i = 0; i < nfds; i++) {
             if ((it = m.find(fds[i].fd)) == m.end()) {
@@ -644,7 +665,7 @@ int fcntl(int fildes, int cmd, ...) {
             int param = va_arg(arg_list, int);
             int flag  = param;
             if (co_is_enable_sys_hook() && lp) {
-                flag |= O_NONBLOCK;
+                flag |= O_NONBLOCK; // 启用了hook，则设置non-block
             }
             ret = g_sys_fcntl_func(fildes, cmd, flag);
             if (0 == ret && lp) {

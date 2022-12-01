@@ -48,7 +48,7 @@ struct stCoRoutine_t {
 
     char cStart;
     char cEnd;
-    char cIsMain;
+    char cIsMain; // 是否为主协程，主协程在系统的栈上，其他协程在堆上
     char cEnableSysHook;
     char cIsShareStack;
 

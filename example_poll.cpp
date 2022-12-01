@@ -103,6 +103,7 @@ static void *poll_routine(void *arg) {
         SetNonBlock(fd);
         v[i].fd = fd;
 
+        // connect()由于设置了non-block而没有被hook，所以不会发生协程切换，也就是这个循环将一次性跑完
         int ret = connect(fd, (struct sockaddr *)&v[i].addr, sizeof(v[i].addr));
         printf("co %p connect i %ld ret %d errno %d (%s)\n", co_self(), i, ret,
                errno, strerror(errno));
@@ -112,11 +113,12 @@ static void *poll_routine(void *arg) {
 
     for (size_t i = 0; i < v.size(); i++) {
         pf[i].fd     = v[i].fd;
-        pf[i].events = (POLLOUT | POLLERR | POLLHUP);
+        pf[i].events = (POLLOUT | POLLERR | POLLHUP); // POLLERR/POLLHUP 其实无需添加
     }
     set<int> setRaiseFds;
     size_t iWaitCnt = v.size();
     for (;;) {
+        // poll会发生协程切换
         int ret = poll(pf, iWaitCnt, 1000);
         printf("co %p poll wait %ld ret %d\n", co_self(), iWaitCnt, ret);
         for (int i = 0; i < (int)iWaitCnt; i++) {

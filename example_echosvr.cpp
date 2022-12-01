@@ -59,24 +59,30 @@ static int SetNonBlock(int iSock) {
     return ret;
 }
 
+// 协程入口函数
 static void *readwrite_routine(void *arg) {
     co_enable_hook_sys();
 
     task_t *co = (task_t *)arg;
     char buf[1024 * 16];
     for (;;) {
+        // 当前协程负责的fd为空
         if (-1 == co->fd) {
+            // 将自己放入到空闲的协程栈中，即加入空闲的协程池，使用stack是为了获得空间局部性？
             g_readwrite.push(co);
+            // 切出，等待下次被唤醒
             co_yield_ct();
+            // 被唤醒之后，继续循环，检查负责的fd
             continue;
         }
 
+        // 有fd，开始读写
         int fd = co->fd;
         co->fd = -1;
 
         for (;;) {
             struct pollfd pf = {0};
-            pf.fd            = fd;
+            pf.fd            = fd; // 这是一个client socket fd
             pf.events        = (POLLIN | POLLERR | POLLHUP);
             co_poll(co_get_epoll_ct(), &pf, 1, 1000);
 
